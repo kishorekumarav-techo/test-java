@@ -9,9 +9,7 @@ import pageObjects.ShoppingCart;
 public class TC_001 extends BaseClass {
 	
 	@Test(priority=1, groups = { "Sanity", "Regression" })
-	void testSearchAddAndVerifyCart() {
-
-		
+	void testSearchAddAndVerifyCart() 
 		
 		try {
 		
@@ -32,11 +30,11 @@ public class TC_001 extends BaseClass {
 			productSearch.addToCartByName(productTitle);
 			logger.info("***** Added item to cart *****");
 			
-			ShoppingCart s = new ShoppingCart(driver);
-			s.clickOnCart();
+			ShoppingCart shoppingCart = new ShoppingCart(driver);
+			shoppingCart.clickOnCart();
 		
-			Assert.assertEquals(s.getShoppingCartHeader(),CartHeader);
-			Assert.assertTrue(s.isCartItemExist(productTitle));
+			Assert.assertEquals(shoppingCart.getShoppingCartHeader(),CartHeader);
+			Assert.assertTrue(shoppingCart.isCartItemExist(productTitle));
 			logger.info("***** Verified cart item *****");
 			logger.info("***** Ended TC_001 *****");
 			
