@@ -16,7 +16,7 @@ public class TC_001 extends BaseClass {
 			logger.info("***** Started TC_001 *****");
 			
 			String pageTitle = pr.getProperty("pagetitle");
-		    String CartHeader = pr.getProperty("cartheader");
+		    String shoppingCartHeader = pr.getProperty("cartheader");
 			String itemName = pr.getProperty("item1");
 			Assert.assertEquals(driver.getTitle(),pageTitle);
 			
@@ -39,9 +39,9 @@ public class TC_001 extends BaseClass {
 			logger.info("***** Ended TC_001 *****");
 			
 		}
-		catch (AssertionError e) {
-			logger.error("Assertion Failed :- "+ e);
-			Assert.fail();
+		catch (AssertionError assertionError) {
+    			logger.error("Assertion Failed :- "+ assertionError);
+    			Assert.fail();
 		}
 		catch(Exception e) {
 			logger.error("Testcase Failed...");
