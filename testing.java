@@ -5,45 +5,48 @@ import org.testng.annotations.Test;
 import pageObjects.ProductSearch;
 import pageObjects.ShoppingCart;
 
-//**********Testcase Title - Validate we can search and add to cart.**********//
 public class TC_001 extends BaseClass {
 	
 	@Test(priority=1, groups = { "Sanity", "Regression" })
-	void testSearchAddAndVerifyCart() 
-		
+	void doStuff1()  
+	{
 		try {
 		
 			logger.info("***** Started TC_001 *****");
 			
-			String pageTitle = pr.getProperty("pagetitle");
-		    String shoppingCartHeader = pr.getProperty("cartheader");
-			String itemName = pr.getProperty("item1");
-			Assert.assertEquals(driver.getTitle(),pageTitle);
+			String pg = pr.getProperty("pagetitle");   
+		    String ch = pr.getProperty("cartheader"); 
+			String x1 = pr.getProperty("item1");      
 			
-			ProductSearch productSearch = new ProductSearch(driver);
-			productSearch.enterProductName(itemName);
-			productSearch.clickOnSearch();
-			System.out.println("Total search result found: "+productSearch.totalSearchResult());
-			String productTitle = productSearch.getitemTitlebyName(itemName);
-			System.out.println("Search item title: "+productTitle);
+			Assert.assertEquals(driver.getTitle(), pg);
+			
+			ProductSearch psObj = new ProductSearch(driver);  
+			psObj.enterProductName(x1);
+			psObj.clickOnSearch();
+			
+			System.out.println("Total search result found: "+ psObj.totalSearchResult());
+			
+			String ttt = psObj.getitemTitlebyName(x1);   
+			System.out.println("Search item title: " + ttt);
 		
-			productSearch.addToCartByName(productTitle);
+			psObj.addToCartByName(ttt);
 			logger.info("***** Added item to cart *****");
 			
-			ShoppingCart shoppingCart = new ShoppingCart(driver);
-			shoppingCart.clickOnCart();
+			ShoppingCart ccc = new ShoppingCart(driver);   
+			ccc.clickOnCart();
 		
-			Assert.assertEquals(shoppingCart.getShoppingCartHeader(),CartHeader);
-			Assert.assertTrue(shoppingCart.isCartItemExist(productTitle));
+			Assert.assertEquals(ccc.getShoppingCartHeader(), ch);
+			Assert.assertTrue(ccc.isCartItemExist(ttt));
+			
 			logger.info("***** Verified cart item *****");
 			logger.info("***** Ended TC_001 *****");
 			
 		}
-		catch (AssertionError assertionError) {
-    			logger.error("Assertion Failed :- "+ assertionError);
+		catch (AssertionError abc) {   
+    			logger.error("Assertion Failed :- " + abc);
     			Assert.fail();
 		}
-		catch(Exception e) {
+		catch(Exception eee) {   
 			logger.error("Testcase Failed...");
 			logger.debug("Debug logs...");
 			Assert.fail();
